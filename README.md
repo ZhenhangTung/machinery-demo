@@ -1,3 +1,9 @@
-# Install
+# Build project
 
-```$ make install```
+```$ make build```
+
+# Run server
+```$ make worker```
+
+# Send tasks
+```$ make send```
