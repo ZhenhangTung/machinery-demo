@@ -98,8 +98,12 @@ func sendSms() error {
 	log.INFO.Printf("==================")
 
 	log.INFO.Println("Group of tasks (parallel execution):")
-
-	group := tasks.NewGroup(&mutiMsgTask, &mutiMsgTask1)
+	var groupTasks []*tasks.Signature
+	// 1000 tasks in parallel
+	for i := 0; i < 1000; i++ {
+		groupTasks = append(groupTasks, &mutiMsgTask)
+	}
+	group := tasks.NewGroup(groupTasks...)
 	asyncResults, err := server.SendGroup(group, 10)
 	if err != nil {
 		return fmt.Errorf("Could not send group: %s", err.Error())
